@@ -1,0 +1,15 @@
+name: StacheStash
+main: com.ACStache.StacheStash.StacheStash
+version: 0.1
+author: ACStache
+description: Collection of useful commands
+commands:
+    time:
+        description: allows setting the time or adding to it
+        usage: /time (set/add) ## [worldname]
+        permission: StacheStash.TimeSet
+        permission: StacheStash.TimeAdd
+    motd:
+    	description: displays the MotD
+    	usage: /time [reload]
+    	permission: StacheStash.MotD
