@@ -1,15 +1,27 @@
 name: StacheStash
 main: com.ACStache.StacheStash.StacheStash
-version: 0.1
+version: 0.1.2
 author: ACStache
 description: Collection of useful commands
 commands:
     time:
         description: allows setting the time or adding to it
-        usage: /time (set/add) ## [worldname]
+        usage: |
+               /time set ## [worldname]        - Set time to ## (0-24000)
+               /time add ## [worldname]        - Add ## to current time (0-24000)
+               /time day                    - Set time to 0
+               /time noon                    - Set time to 6000
+               /time dusk                    - Set time to 12000
+               /time midnight                - Set time to 18000
         permission: StacheStash.TimeSet
         permission: StacheStash.TimeAdd
     motd:
-    	description: displays the MotD
-    	usage: /time [reload]
-    	permission: StacheStash.MotD
+        description: displays the MotD (or reloads it if specified)
+        usage: /motd [reload]
+        permission: StacheStash.MotD
+        permission: StacheStash.MotDreload
+    list:
+        description: displays the list of Online players
+        usages: /list
+        permission: StacheStash.List
+        alias: /who, /l
