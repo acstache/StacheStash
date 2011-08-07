@@ -14,22 +14,24 @@ import org.bukkit.entity.Player;
 
 public class StacheMotD
 {
-    @SuppressWarnings("unused")
-    private StacheStash plugin;
     private static ArrayList<String> motdlist;
     private static Logger log = Logger.getLogger("Minecraft");
-    private static File file = new File("plugins/MotD/MotD.txt");
+    private static File file = new File("plugins/StacheStash/MotD.txt");
     
-    public StacheMotD(StacheStash stachestash)
-    {
-        plugin = stachestash;
-    }
-    
-    public static void showMotD(Player who)
+    /**
+     * Display the Message of the Day to player
+     * @param player the person who signed in or typed /motd
+     */
+    public static void showMotD(Player player)
     {
         for(String s: motdlist)
-            who.sendMessage(ChatColor.GREEN + s);
+            player.sendMessage(ChatColor.GREEN + s);
     }
+    /**
+     * Determines who typed /motd then deals with it accordingly
+     * @param sender
+     * @throws IOException
+     */
     public static void showMotD(CommandSender sender) throws IOException
     {
         Player player = (Player)sender;
@@ -43,7 +45,7 @@ public class StacheMotD
             {
                 player.sendMessage("No MotD Found");
                 createMotD();
-                player.sendMessage("Default MotD created");
+                player.sendMessage("Default MotD created, please type /motd again");
                 loadMotD();
             }
         }
@@ -57,6 +59,10 @@ public class StacheMotD
         }
     }
     
+    /**
+     * Load the Message of the Day to be displayed later on
+     * @throws IOException
+     */
     public static void loadMotD() throws IOException
     {
         String line;
@@ -68,10 +74,25 @@ public class StacheMotD
         br.close();
     }
     
+    /**
+     * Create a default Message of the Day if none is found
+     * @throws IOException
+     */
     public static void createMotD() throws IOException
     {
-        FileWriter writer = new FileWriter(file);
+        File cFile = new File("plugins/StacheStash");
+        cFile.mkdir();
+        FileWriter writer = new FileWriter(file);        
         writer.write("Welcome to the server!");
         writer.write("Please enjoy your stay!");
+    }
+    
+    /**
+     * Returns the file of the MotD
+     * @return the file of the MotD
+     */
+    public static File getFile()
+    {
+        return file;
     }
 }

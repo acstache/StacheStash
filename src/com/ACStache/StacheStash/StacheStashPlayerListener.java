@@ -28,15 +28,12 @@ public class StacheStashPlayerListener extends PlayerListener
             }
         }, 5); //delays showing the MotD by 5 server ticks (~1/4 of a second)
         
-        //TODO add player to an Online List for '/who' and/or '/list'
+        StacheList.addOnline(player);
     }
     
     public void onPlayerQuit(PlayerQuitEvent event)
     {
         player = event.getPlayer();
-        //planning on a '/who' and/or '/list' command
-        //need onQuit event to remove player from the Online List
+        StacheList.removeOnline(player);
     }
-    
-    
 }

@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -13,6 +12,10 @@ public class StacheTime
 {
     private static Logger log = Logger.getLogger("Minecraft");
     
+    /**
+     * Show the possible '/time' commands to player
+     * @param player the player who either typed '/time' or incorrectly typed a different '/time' command
+     */
     public static void showTime(Player player)
     {
         player.sendMessage(ChatColor.GREEN + "Any parameters in " + ChatColor.RED + "[]" + ChatColor.GREEN + "'s are optional");
@@ -21,6 +24,10 @@ public class StacheTime
         player.sendMessage(ChatColor.GREEN + "'/time (day/noon/dusk/midnight) " + ChatColor.RED + "[worldname]'");
     }
     
+    /**
+     * Shows the possible 'time' commands in the console if 'time' was typed
+     * or a differnt 'time' command was incorrectly typed
+     */
     public static void showTimeConsole()
     {
         log.info("Please enter one of the following commands:");
@@ -29,7 +36,13 @@ public class StacheTime
         log.info("'time (day/noon/dusk/midnight) worldname'");
     }
     
-    public static boolean TimeChanger(CommandSender sender, Command command, String label, String[] args) 
+    /**
+     * Algorythim to set or add time, or just display the time commands when a '/time' or 'time' command was used
+     * @param sender The sender of the command
+     * @param args The list of arguments with the command
+     * @return true/false for the onCommand method
+     */
+    public static boolean TimeChanger(CommandSender sender, String[] args) 
     {
         Player player = (Player)sender;
         
