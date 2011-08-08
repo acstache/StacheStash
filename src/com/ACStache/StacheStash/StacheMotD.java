@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 public class StacheMotD
 {
-    private static ArrayList<String> motdlist;
+    private static ArrayList<String> motdlist = new ArrayList<String>();
     private static Logger log = Logger.getLogger("Minecraft");
     private static File file = new File("plugins/StacheStash/MotD.txt");
     
@@ -32,9 +32,59 @@ public class StacheMotD
      * @param sender
      * @throws IOException
      */
-    public static void showMotD(CommandSender sender) throws IOException
+    public static void showMotD(CommandSender sender, String[] args) throws IOException
     {
-        Player player = (Player)sender;
+        Player player = null;
+        if(sender instanceof Player)
+        {
+            player = (Player)sender;
+        }
+        
+        if(args.length < 1)
+        {
+            if(sender instanceof Player && StacheStash.has(player, "StacheStash.MotD"))
+            {
+                showMotD(player);
+            }
+            else
+            {
+                if(!(sender instanceof Player))
+                    log.info("You can't use that command from the console");
+                else
+                    player.sendMessage(ChatColor.RED + "You don't have Permission to do that");
+            }
+        }
+        else if(args[0].equalsIgnoreCase("reload"))
+        {
+            if(!(sender instanceof Player) || StacheStash.has(player, "StacheStash.MotDreload"))
+            {
+                try
+                {
+                    StacheMotD.loadMotD();
+                    if(!(sender instanceof Player))
+                        log.info("MotD loaded successfully!");
+                    else
+                        player.sendMessage(ChatColor.GREEN + "MotD loaded successfully!");
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+                player.sendMessage(ChatColor.RED + "You don't have Permission to do that");
+            }
+        }
+        else
+        {
+            if(!(sender instanceof Player))
+                log.info("Please type 'motd reload'");
+            else
+                player.sendMessage(ChatColor.RED + "Please type '/motd' or '/motd reload'");
+        }
+        
+        /*
         if(sender instanceof Player && StacheStash.has(player, "StacheStash.MotD"))
         {
             if(file.exists())
@@ -57,6 +107,7 @@ public class StacheMotD
         {
             player.sendMessage("You don't have permission to use that command");
         }
+        */
     }
     
     /**

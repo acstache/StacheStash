@@ -42,7 +42,7 @@ public class StacheTime
      * @param args The list of arguments with the command
      * @return true/false for the onCommand method
      */
-    public static boolean TimeChanger(CommandSender sender, String[] args) 
+    public static void TimeChanger(CommandSender sender, String[] args) 
     {
         Player player = (Player)sender;
         
@@ -267,6 +267,5 @@ public class StacheTime
                 showTimeConsole();
             }
         }
-        return true;
     }
 }

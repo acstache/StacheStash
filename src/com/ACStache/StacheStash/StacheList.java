@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class StacheList
 {
     private static Logger log = Logger.getLogger("Minecraft");
-    private static ArrayList<String> online;
+    private static ArrayList<String> online = new ArrayList<String>();
     
     public static void initList()
     {
@@ -49,7 +49,9 @@ public class StacheList
     }
     public static void showOnline(Player player)
     {
+        String temp = "";
         for(int i = 0; i < online.size(); i++)
-            player.sendMessage(online.get(i) + " ");
+            temp += online.get(i) + " ";
+        player.sendMessage(temp);
     }
 }

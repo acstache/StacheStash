@@ -59,7 +59,7 @@ public class StacheStash extends JavaPlugin
             }            
         }
         
-      //register event listener by (type, typeListener, priority, this)
+        //register event listener by (type, typeListener, priority, this)
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
@@ -97,7 +97,8 @@ public class StacheStash extends JavaPlugin
     {
         if(command.getName().equalsIgnoreCase("time"))
         {
-            return StacheTime.TimeChanger(sender, args);
+            StacheTime.TimeChanger(sender, args);
+            return true;
         }
         else if(command.getName().equalsIgnoreCase("who") || command.getName().equalsIgnoreCase("list"))
         {
@@ -106,41 +107,13 @@ public class StacheStash extends JavaPlugin
         }
         else if(command.getName().equalsIgnoreCase("motd"))
         {
-            if(args.length < 1)
+            try
             {
-                try
-                {
-                    StacheMotD.showMotD(sender);
-                }
-                catch (IOException e)
-                {   
-                    e.printStackTrace();
-                }
+                StacheMotD.showMotD(sender, args);
             }
-            else if(args[0].equalsIgnoreCase("reload"))
+            catch (IOException e)
             {
-                if(!(sender instanceof Player) || has((Player)sender, "StacheStash.MotDreload"))
-                {
-                    try
-                    {
-                        StacheMotD.loadMotD();
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                else
-                {
-                    ((Player)sender).sendMessage("You do not have permission to do that");
-                }
-            }
-            else
-            {
-                if(!(sender instanceof Player))
-                    log.info("Please type 'motd reload'");
-                else
-                    ((Player)sender).sendMessage("Please type '/motd' or '/motd reload'");
+                e.printStackTrace();
             }
             return true;
         }
