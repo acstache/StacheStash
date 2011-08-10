@@ -28,12 +28,13 @@ public class StacheStashPlayerListener extends PlayerListener
             }
         }, 5); //delays showing the MotD by 5 server ticks (~1/4 of a second)
         
-        StacheList.addOnline(player);
+        StacheList.showOnline(player);
     }
     
     public void onPlayerQuit(PlayerQuitEvent event)
     {
         player = event.getPlayer();
-        StacheList.removeOnline(player);
+        //??
+        //profit
     }
 }

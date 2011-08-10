@@ -28,16 +28,13 @@ public class StacheStash extends JavaPlugin
         //Get description of plugin from plugin.yml
         info = getDescription();
         
-        //initialize the Online Players list
-        StacheList.initList();
-        
         log.info("Loading " + info.getName() + " Configuration...");
-        //stick a way to determine if there's already a txt file present, then do the try/catch, otherwise create one.
-        if(StacheMotD.getFile().exists())
+
+        if(StacheMotD.getFile().exists()) //if a MotD file exists
         {
             try
             {
-                StacheMotD.loadMotD();
+                StacheMotD.loadMotD(); //load it
                 log.info("Configuration loaded!");
             }
             catch (IOException e)
@@ -45,12 +42,12 @@ public class StacheStash extends JavaPlugin
                 e.printStackTrace();
             }
         }
-        else
+        else //otherwise
         {
             log.info("No MotD file found. Creating a default MotD file");
             try
             {
-                StacheMotD.createMotD();
+                StacheMotD.createMotD(); //create it
                 log.info("MotD file created successfully!");
             }
             catch (IOException e)
