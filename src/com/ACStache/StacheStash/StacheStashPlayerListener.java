@@ -25,10 +25,9 @@ public class StacheStashPlayerListener extends PlayerListener
             public void run()
             {
                 StacheMotD.showMotD(player);
+                StacheList.showOnline(player);
             }
-        }, 5); //delays showing the MotD by 5 server ticks (~1/4 of a second)
-        
-        StacheList.showOnline(player);
+        }, 4); //delays showing the MotD by 4 server ticks (~1/5 of a second)
     }
     
     public void onPlayerQuit(PlayerQuitEvent event)

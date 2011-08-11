@@ -28,14 +28,14 @@ public class StacheStash extends JavaPlugin
         //Get description of plugin from plugin.yml
         info = getDescription();
         
-        log.info("Loading " + info.getName() + " Configuration...");
+        log.info("[StacheStash] Loading Configuration...");
 
         if(StacheMotD.getFile().exists()) //if a MotD file exists
         {
             try
             {
                 StacheMotD.loadMotD(); //load it
-                log.info("Configuration loaded!");
+                log.info("[StacheStash] Configuration loaded!");
             }
             catch (IOException e)
             {
@@ -44,11 +44,11 @@ public class StacheStash extends JavaPlugin
         }
         else //otherwise
         {
-            log.info("No MotD file found. Creating a default MotD file");
+            log.info("[StacheStash] No MotD file found. Creating a default MotD file");
             try
             {
                 StacheMotD.createMotD(); //create it
-                log.info("MotD file created successfully!");
+                log.info("[StacheStash] MotD file created successfully!");
             }
             catch (IOException e)
             {
@@ -65,12 +65,12 @@ public class StacheStash extends JavaPlugin
         setupPermissions();
 
         //Display plugin name & version on successful enable
-        log.info(info.getName() + " " + info.getVersion() + " is Enabled! (By: ACStache)");
+        log.info("[StacheStash] v" + info.getVersion() + " is Enabled! (By: ACStache)");
     }
     
     public void onDisable()
     {
-        log.info(info.getName() + " " + info.getVersion() + "disabled!");
+        log.info("[StacheStash] v" + info.getVersion() + "disabled!");
     }
     
     private void setupPermissions()
@@ -95,6 +95,11 @@ public class StacheStash extends JavaPlugin
         if(command.getName().equalsIgnoreCase("time"))
         {
             StacheTime.TimeChanger(sender, args);
+            return true;
+        }
+        else if(command.getName().equalsIgnoreCase("weather"))
+        {
+            StacheWeather.weatherChanger(sender, args);
             return true;
         }
         else if(command.getName().equalsIgnoreCase("who") || command.getName().equalsIgnoreCase("list"))

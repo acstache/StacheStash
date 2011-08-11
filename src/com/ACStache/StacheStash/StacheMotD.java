@@ -24,8 +24,8 @@ public class StacheMotD
      */
     public static void showMotD(Player player)
     {
-        for(String s: motdlist)
-            player.sendMessage(ChatColor.GREEN + s);
+        for(String s: motdlist) //for every line read from the text file
+            player.sendMessage(ChatColor.GREEN + s); //print it out to the player
     }
     /**
      * Determines who typed /motd then deals with it accordingly
@@ -35,44 +35,50 @@ public class StacheMotD
     public static void showMotD(CommandSender sender, String[] args) throws IOException
     {
         Player player = null;
-        if(sender instanceof Player)
-        {
+        if(sender instanceof Player) //if sender is a player, initialize player
             player = (Player)sender;
-        }
         
-        if(args.length < 1)
+        if(args.length < 1) //just '/motd' or 'motd' typed
         {
-            if(file.exists())
+            if(file.exists()) //checks the file exists
             {
-                if(sender instanceof Player && StacheStash.has(player, "StacheStash.MotD"))
+                if(sender instanceof Player && StacheStash.has(player, "StacheStash.MotD")) //is a player and has permission
                 {
-                    showMotD(player);
+                    showMotD(player); //display the MotD
                 }
-                else
+                else //is console or doesn't have permission
                 {
-                    if(!(sender instanceof Player))
-                        log.info("You can't use that command from the console");
-                    else
+                    if(!(sender instanceof Player)) //console
+                        log.info("[StacheStash] You can't use that command from the console");
+                    else //no permission
                         player.sendMessage(ChatColor.RED + "You don't have Permission to do that");
                 }
             }
-            else
+            else //no file exists
             {
-                player.sendMessage(ChatColor.RED + "No MotD Found");
-                createMotD();
-                player.sendMessage(ChatColor.GREEN + "Default MotD created, please type /motd again");
-                loadMotD();
+                createMotD(); //create default MotD file
+                loadMotD(); //load newly created MotD file
+                if(sender instanceof Player) //tell player what happened
+                {
+                    player.sendMessage(ChatColor.RED + "No MotD found");
+                    player.sendMessage(ChatColor.GREEN + "Default MotD created, please type /motd again");
+                }
+                else //tell console what happened
+                {
+                    log.info("[StacheStash] No MotD found");
+                    log.info("[StacheStash] Default MotD created. 'motd' not allowed in console.");
+                }
             }
         }
-        else if(args[0].equalsIgnoreCase("reload"))
+        else if(args[0].equalsIgnoreCase("reload")) //reloading MotD.txt
         {
-            if(!(sender instanceof Player) || StacheStash.has(player, "StacheStash.MotDreload"))
+            if(!(sender instanceof Player) || StacheStash.has(player, "StacheStash.MotDreload") || player.isOp())
             {
                 try
                 {
                     StacheMotD.loadMotD();
                     if(!(sender instanceof Player))
-                        log.info("MotD reloaded successfully!");
+                        log.info("[StacheStash] MotD reloaded successfully!");
                     else
                         player.sendMessage(ChatColor.GREEN + "MotD reloaded successfully!");
                 }
@@ -89,7 +95,7 @@ public class StacheMotD
         else
         {
             if(!(sender instanceof Player))
-                log.info("Please type 'motd reload'");
+                log.info("[StacheStash] Please type 'motd reload'");
             else
                 player.sendMessage(ChatColor.RED + "Please type '/motd' or '/motd reload'");
         }

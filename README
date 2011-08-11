@@ -1,0 +1,44 @@
+I'm currently learning how to code plugins.
+So far, I've been going one simple command at a time, and haven't gotten into complex features.
+
+As of this time, due to my lack of continuity, some commands REQUIRE Permissions 3.1.x.
+Everytime you see [worldname], it's optional, but specifies target world to use the command on.
+The commands and their corresponding permissions implemented so far are as follows:
+    time:
+        description: allows setting the time or adding to it
+        usage: |
+               /time set ## [worldname]        - Set time to ## (0-24000)
+               /time add ## [worldname]        - Add ## to current time (0-24000)
+               /time day                       - Set time to 0
+               /time noon                      - Set time to 6000
+               /time dusk                      - Set time to 12000
+               /time midnight                  - Set time to 18000
+               /time                           - Display possible '/time' commands
+        permission: StacheStash.TimeSet
+        permission: StacheStash.TimeAdd
+    motd:
+        description: displays the MotD (or reloads it if specified)
+        usage: |
+               /motd
+               /motd reload
+        permission: StacheStash.MotD
+        permission: StacheStash.MotDreload
+    list:
+        description: displays the list of Online players
+        usage: /list
+        permission: StacheStash.List
+    who:
+        description: displays the list of Online players
+        usage: /who
+        permission: StacheStash.List
+    weather:
+        description: allows setting the weather
+        usage: |
+               /weather set (conditions) [worldname]       - Set weather to normal, rain, or thunder & lightning
+               /weather set normal [worldname]
+               /weather set rain [worldname]
+               /weather set lightning [worldname]
+               /weather get [worldname]                    - Get weather (of world if specified)
+               /weather                                    - Display possible '/weather' commands
+        permission: StacheStash.WeatherSet
+        permission: StacheStash.WeatherGet

@@ -22,11 +22,15 @@ public class StacheList
         {
             if(!(sender instanceof Player))
             {
-                log.info("Online Players [world: players]");
+                int counter = 0;
+                for(Player online : Bukkit.getServer().getOnlinePlayers()) //count # of online players
+                    counter += 1; //for every player, add 1 to counter
+                
+                log.info("Online Players [" + counter + "/" + Bukkit.getServer().getMaxPlayers() + "]"); //Online Players [on/max]
                 for(World w : Bukkit.getServer().getWorlds()) //get list of worlds and look through them
                 {
                    String temp = w.getName() + ": "; //add world name to String
-
+                   
                    for(Player p : w.getPlayers()) //get list of players and look through them
                        temp += p.getName() + " "; //add player name to String
 
@@ -44,7 +48,11 @@ public class StacheList
     }
     public static void showOnline(Player player)
     {
-        player.sendMessage("Online Players [world: players]");
+        int counter = 0;
+        for(Player online : Bukkit.getServer().getOnlinePlayers()) //count # of online players
+            counter += 1; //for every player, add 1 to counter
+        
+        player.sendMessage("Online Players [" + counter + "/" + Bukkit.getServer().getMaxPlayers() + "]"); //Online Players [on/max]
         for(World w : Bukkit.getServer().getWorlds()) //get list of worlds and look through them
         {
            String temp = w.getName() + ": "; //add world name to String

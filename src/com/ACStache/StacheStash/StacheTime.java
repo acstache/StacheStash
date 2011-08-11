@@ -16,7 +16,7 @@ public class StacheTime
      * Show the possible '/time' commands to player
      * @param player the player who either typed '/time' or incorrectly typed a different '/time' command
      */
-    public static void showTime(Player player)
+    public static void showTime(Player player) //display '/time' syntax to player
     {
         player.sendMessage(ChatColor.GREEN + "Any parameters in " + ChatColor.RED + "[]" + ChatColor.GREEN + "'s are optional");
         player.sendMessage(ChatColor.GREEN + "'/time set ## " + ChatColor.RED + "[worldname]'");
@@ -28,12 +28,12 @@ public class StacheTime
      * Shows the possible 'time' commands in the console if 'time' was typed
      * or a differnt 'time' command was incorrectly typed
      */
-    public static void showTimeConsole()
+    public static void showTimeConsole() //display 'time' syntax to console
     {
-        log.info("Please enter one of the following commands:");
-        log.info("'time set ## worldname'");
-        log.info("'time add ## worldname'");
-        log.info("'time (day/noon/dusk/midnight) worldname'");
+        log.info("[StacheStash] Please enter one of the following commands:");
+        log.info("[StacheStash] 'time set ## worldname'");
+        log.info("[StacheStash] 'time add ## worldname'");
+        log.info("[StacheStash] 'time (day/noon/dusk/midnight) worldname'");
     }
     
     /**
@@ -44,7 +44,9 @@ public class StacheTime
      */
     public static void TimeChanger(CommandSender sender, String[] args) 
     {
-        Player player = (Player)sender;
+        Player player = null;
+        if(sender instanceof Player)
+            player = (Player)sender;
         
         if(args.length < 1) //if player types just '/time' or console types just 'time'
         {
@@ -59,7 +61,7 @@ public class StacheTime
         }
         else if(args[0].equalsIgnoreCase("set")) //sets time to args[1]
         {
-            if(StacheStash.has(player, "StacheStache.TimeSet") || !(sender instanceof Player)) //player has TickTock.Set perm or from console
+            if(StacheStash.has(player, "StacheStash.TimeSet") || !(sender instanceof Player) || player.isOp()) //player has StacheStash.TimeSet perm, is Op, or from console
             {
                 if(sender instanceof Player) //sees if it's the player typing the command
                 {
@@ -77,13 +79,13 @@ public class StacheTime
                             {
                                 poWorld.setTime(Long.parseLong(args[1])); //cast args[1] to long from String and set time
                             }
-                            else
+                            else //world typed incorrectly
                             {
                                 player.sendMessage(ChatColor.GREEN + "You need to specify an existing world. '/time set ## " + ChatColor.RED + "[worldname]'");
                             }
                         }
                     }
-                    else
+                    else //found something other than a number for time to set
                     {
                         player.sendMessage(ChatColor.GREEN + "Please enter a numeric value for the time. '/time set ##'");
                     }
@@ -99,19 +101,19 @@ public class StacheTime
                             {
                                 cWorld.setTime(Long.parseLong(args[1])); //cast args[1] to long from String and set time
                             }
-                            else
+                            else //world typed incorrectly
                             {
-                                log.info("You need to specify an existing world. 'time set ## worldname'");
+                                log.info("[StacheStash] You need to specify an existing world. 'time set ## worldname'");
                             }
                         }
-                        else
+                        else //world not specified
                         {
-                            log.info("You need to specify a world. 'time set ## worldname'");
+                            log.info("[StacheStash] You need to specify a world. 'time set ## worldname'");
                         }
                     }
-                    else
+                    else //found something other than a number for time to set
                     {
-                        log.info("Please enter a numeric value for the time. 'time set ## worldname'");
+                        log.info("[StacheStash] Please enter a numeric value for the time. 'time set ## worldname'");
                     }
                 }
             }
@@ -122,7 +124,7 @@ public class StacheTime
         }
         else if(args[0].equalsIgnoreCase("day") || args[0].equalsIgnoreCase("noon") || args[0].equalsIgnoreCase("dusk") || args[0].equalsIgnoreCase("midnight"))
         {
-            if(StacheStash.has(player, "StacheStash.TimeSet") || !(sender instanceof Player)) //player has TickTock.Set perm or from console
+            if(StacheStash.has(player, "StacheStash.TimeSet") || !(sender instanceof Player) || player.isOp()) //player has StacheStash.TimeSet perm, is Op, or from console
             {
                 if(sender instanceof Player) //sees if it's the player typing the command
                 {
@@ -156,13 +158,13 @@ public class StacheTime
                             else
                                 player.sendMessage(ChatColor.GREEN + "Please specify a time (day/noon/dusk/midnight)");
                         }
-                        else
+                        else //world typed incorrectly
                         {
-                            player.sendMessage(ChatColor.GREEN + "You need to specify an existing world. 'time (day/noon/dusk/midnight) " + ChatColor.RED + "[worldname]'");
+                            player.sendMessage(ChatColor.GREEN + "You need to specify an existing world. '/time (day/noon/dusk/midnight) " + ChatColor.RED + "[worldname]'");
                         }
                     }
                 }
-                else
+                else //console
                 {
                     World cWorld = Bukkit.getServer().getWorld(args[1]); //gets world name from server
                     if(!(cWorld==null)) //makes sure it's not a null world
@@ -178,9 +180,9 @@ public class StacheTime
                         else
                             log.info("Please specify a time (day/noon/dusk/midnight)");
                     }
-                    else
+                    else //world typed incorrectly
                     {
-                        log.info("Please specify a world. 'time (day/noon/dusk/midnight) worldname'");
+                        log.info("[StacheStash] Please specify a world. 'time (day/noon/dusk/midnight) worldname'");
                     }
                 }
             }
@@ -191,7 +193,7 @@ public class StacheTime
         }
         else if(args[0].equalsIgnoreCase("add"))
         {
-            if(StacheStash.has(player, "StacheStash.TimeAdd") || !(sender instanceof Player)) //player has TickTock.Add perm or from console
+            if(StacheStash.has(player, "StacheStash.TimeAdd") || !(sender instanceof Player) || player.isOp()) //player has StacheStash.TimeAdd perm, is Op, or from console
             {
                 if(sender instanceof Player) //sees if it's the player typing the command
                 {
@@ -216,7 +218,7 @@ public class StacheTime
                         }
                         
                     }
-                    else
+                    else //found something other than a number for time to add
                     {
                         player.sendMessage(ChatColor.GREEN + "Please enter a numeric value for the time. '/time add ##'");
                     }
@@ -232,19 +234,19 @@ public class StacheTime
                             {
                                 cWorld.setTime(cWorld.getTime() + Long.parseLong(args[1])); //cast args[1] to long from String and add time
                             }
-                            else
+                            else //world typed incorrectly
                             {
-                                log.info("You need to specify an existing world. 'time add ## worldname'");
+                                log.info("[StacheStash] You need to specify an existing world. 'time add ## worldname'");
                             }
                         }
-                        else
+                        else //world not specified
                         {
-                            log.info("You need to specify a world. 'time add ## worldname'");
+                            log.info("[StacheStash] You need to specify a world. 'time add ## worldname'");
                         }
                     }
-                    else
+                    else //found something other than a number for time to add
                     {
-                        log.info("Please enter a numeric value for the time. 'time add ## worldname'");
+                        log.info("[StacheStash] Please enter a numeric value for the time. 'time add ## worldname'");
                     }
                 }
             }
@@ -261,9 +263,9 @@ public class StacheTime
                 showTime(player);
                 
             }
-            else
+            else //console improperly typed command
             {
-                log.info("That command isn't recognized.");
+                log.info("[StacheStash] That command isn't recognized.");
                 showTimeConsole();
             }
         }
