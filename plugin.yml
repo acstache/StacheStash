@@ -1,6 +1,6 @@
 name: StacheStash
 main: com.ACStache.StacheStash.StacheStash
-version: 0.1.4
+version: 0.1.5
 author: ACStache
 description: Collection of useful commands
 commands:
@@ -31,3 +31,11 @@ commands:
         description: displays the list of Online players
         usage: /who
         permission: StacheStash.List
+    weather:
+        description: allows setting the weather
+        usage: |
+               /weather set (conditions) [worldname]       - Set weather to normal, rain, or thunder & lightning
+               /weather get [worldname]                    - Get weather (of world if specified)
+               /weather                                    - Display possible /weather commands
+        permission: StacheStash.WeatherSet
+        permission: StacheStash.WeatherGet
