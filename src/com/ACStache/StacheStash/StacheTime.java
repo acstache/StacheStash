@@ -61,8 +61,8 @@ public class StacheTime
         }
         else if(args[0].equalsIgnoreCase("set")) //sets time to args[1]
         {
-            if(StacheStash.has(player, "StacheStash.TimeSet") || !(sender instanceof Player) || player.isOp()) //player has StacheStash.TimeSet perm, is Op, or from console
-            {
+            if((StacheStash.has(player, "StacheStash.TimeSet") || (StacheStash.Permissions == null && player.isOp())) || !(sender instanceof Player)) 
+            {//player has StacheStash.TimeSet perm, no perms detected and is Op, or from console
                 if(sender instanceof Player) //sees if it's the player typing the command
                 {
                     if(args[1].matches("^[0-9]+$")) //check args[1] is all numbers
@@ -124,8 +124,8 @@ public class StacheTime
         }
         else if(args[0].equalsIgnoreCase("day") || args[0].equalsIgnoreCase("noon") || args[0].equalsIgnoreCase("dusk") || args[0].equalsIgnoreCase("midnight"))
         {
-            if(StacheStash.has(player, "StacheStash.TimeSet") || !(sender instanceof Player) || player.isOp()) //player has StacheStash.TimeSet perm, is Op, or from console
-            {
+            if((StacheStash.has(player, "StacheStash.TimeSet") || (StacheStash.Permissions == null && player.isOp())) || !(sender instanceof Player)) 
+            {//player has StacheStash.TimeSet perm, no perms detected and is Op, or from console
                 if(sender instanceof Player) //sees if it's the player typing the command
                 {
                     if(args.length < 2) //checks to see if player provided a world name
@@ -193,8 +193,8 @@ public class StacheTime
         }
         else if(args[0].equalsIgnoreCase("add"))
         {
-            if(StacheStash.has(player, "StacheStash.TimeAdd") || !(sender instanceof Player) || player.isOp()) //player has StacheStash.TimeAdd perm, is Op, or from console
-            {
+            if((StacheStash.has(player, "StacheStash.TimeAdd") || (StacheStash.Permissions == null && player.isOp())) || !(sender instanceof Player)) 
+            {//player has StacheStash.TimeAdd perm, no perms detected and is Op, or from console
                 if(sender instanceof Player) //sees if it's the player typing the command
                 {
                     if(args[1].matches("^[0-9]+$")) //check args[1] is all numbers

@@ -14,9 +14,17 @@ public class StacheList
 
     public static void showOnline(CommandSender sender)
     {
-        if((sender instanceof Player) && StacheStash.has((Player)sender, "StacheStash.List"))
+        Player player = null;
+        if(sender instanceof Player) //if sender is a player, initialize player
+            player = (Player)sender;
+        
+        if(StacheStash.Permissions == null && sender instanceof Player) //if no permissions detected and it's a player
         {
-            showOnline((Player)sender);
+            showOnline(player);
+        }
+        else if((sender instanceof Player) && StacheStash.has((Player)sender, "StacheStash.List")) //is player and has permission
+        {
+            showOnline(player);
         }
         else
         {

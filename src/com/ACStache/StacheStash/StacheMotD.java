@@ -42,7 +42,11 @@ public class StacheMotD
         {
             if(file.exists()) //checks the file exists
             {
-                if(sender instanceof Player && StacheStash.has(player, "StacheStash.MotD")) //is a player and has permission
+                if(StacheStash.Permissions == null && sender instanceof Player) //if no permissions detected and it's a player
+                {
+                    showMotD(player); //display the MotD
+                }
+                else if(sender instanceof Player && StacheStash.has(player, "StacheStash.MotD")) //is a player and has permission
                 {
                     showMotD(player); //display the MotD
                 }
@@ -72,22 +76,20 @@ public class StacheMotD
         }
         else if(args[0].equalsIgnoreCase("reload")) //reloading MotD.txt
         {
-            if(!(sender instanceof Player) || StacheStash.has(player, "StacheStash.MotDreload") || player.isOp())
+            if(StacheStash.Permissions == null && sender instanceof Player && player.isOp()) //if no permissions detected and it's a player that isOp
             {
-                try
-                {
-                    StacheMotD.loadMotD();
-                    if(!(sender instanceof Player))
-                        log.info("[StacheStash] MotD reloaded successfully!");
-                    else
-                        player.sendMessage(ChatColor.GREEN + "MotD reloaded successfully!");
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
+                loadMotD();
+                player.sendMessage(ChatColor.GREEN + "MotD reloaded successfully!");
             }
-            else
+            else if(!(sender instanceof Player) || StacheStash.has(player, "StacheStash.MotDreload")) //if from console or player has permission
+            {
+                loadMotD();
+                if(!(sender instanceof Player))
+                    log.info("[StacheStash] MotD reloaded successfully!");
+                else
+                    player.sendMessage(ChatColor.GREEN + "MotD reloaded successfully!");
+            }
+            else //not from console and no permission
             {
                 player.sendMessage(ChatColor.RED + "You don't have Permission to do that");
             }
@@ -127,6 +129,7 @@ public class StacheMotD
         FileWriter writer = new FileWriter(file);        
         writer.write("Welcome to the server!");
         writer.write("Please enjoy your stay!");
+        loadMotD();
     }
     
     /**

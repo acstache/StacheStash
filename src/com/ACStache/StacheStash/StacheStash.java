@@ -19,7 +19,7 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 public class StacheStash extends JavaPlugin
 {
     private final StacheStashPlayerListener playerListener = new StacheStashPlayerListener(this);
-    private static PermissionHandler permissionHandler;
+    public static PermissionHandler Permissions;
     private Logger log = Logger.getLogger("Minecraft");
     private PluginDescriptionFile info;
     
@@ -75,19 +75,19 @@ public class StacheStash extends JavaPlugin
     
     private void setupPermissions()
     {
-        if (permissionHandler != null)
+        if (Permissions != null)
             return;
     
         Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
         if (permissionsPlugin == null) return;
         
-        permissionHandler = ((Permissions) permissionsPlugin).getHandler();
+        Permissions = ((Permissions) permissionsPlugin).getHandler();
     }
     
     // Permissions checker
     public static boolean has(Player p, String s)
     {
-        return (permissionHandler == null || permissionHandler.has(p, s));
+        return (Permissions == null || Permissions.has(p, s));
     }
     
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)

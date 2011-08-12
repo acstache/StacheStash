@@ -24,8 +24,8 @@ public class StacheWeather
         }
         else if(args[0].equalsIgnoreCase("set"))
         {
-            if(sender instanceof Player && StacheStash.has(player, "StacheStash.WeatherSet")) //is a player and has permission
-            {
+            if(sender instanceof Player && (StacheStash.has(player, "StacheStash.WeatherSet") || (StacheStash.Permissions == null && player.isOp())))
+            { //is a player and (has permission or if (no permissions and player isOp))
                 if(args[1].equalsIgnoreCase("normal") || args[1].equalsIgnoreCase("rain") || args[1].equalsIgnoreCase("lightning"))
                 {
                     if(args.length < 3) //no world specified, defaults to player's current world
@@ -110,15 +110,15 @@ public class StacheWeather
         }
         else if(args[0].equalsIgnoreCase("get")) //get weather condition
         {
-            if(sender instanceof Player && StacheStash.has(player, "StacheStash.WeatherGet")) //is player and has permission
-            {
+            if(sender instanceof Player && (StacheStash.has(player, "StacheStash.WeatherGet") || (StacheStash.Permissions == null && player.isOp())))
+            { //is a player and (has permission or if (no permissions and player isOp))
                 if(args.length < 2) //only arg is get
                 {
                     World pWorld = player.getWorld(); //get player's current world
                     if(pWorld.hasStorm()) //if there's a storm
                     {
                         if(pWorld.isThundering()) //check for thundering
-                            player.sendMessage(ChatColor.GREEN + "The weather is thunder & lightning for " + pWorld.getWeatherDuration() + " seconds");
+                            player.sendMessage(ChatColor.GREEN + "The weather is thunder and lightning for " + pWorld.getWeatherDuration() + " seconds");
                         else //no thundering
                             player.sendMessage(ChatColor.GREEN + "The weather is rain for " + pWorld.getWeatherDuration() + " seconds");
                     }
@@ -134,7 +134,7 @@ public class StacheWeather
                         if(cWorld.hasStorm()) //if there's a storm
                         {
                             if(cWorld.isThundering()) //check for thundering
-                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is thunder & lightning for " + cWorld.getWeatherDuration() + " seconds");
+                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is thunder and lightning for " + cWorld.getWeatherDuration() + " seconds");
                             else //no thundering
                                 player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is rain for " + cWorld.getWeatherDuration() + " seconds");
                         }
@@ -161,7 +161,7 @@ public class StacheWeather
                             if(cWorld.hasStorm()) //if there's a storm
                             {
                                 if(cWorld.isThundering()) //check for thundering
-                                    log.info("[StacheStash] The weather in " + cWorld.getName() + " is thunder & lightning for " + cWorld.getWeatherDuration() + " seconds");
+                                    log.info("[StacheStash] The weather in " + cWorld.getName() + " is thunder and lightning for " + cWorld.getWeatherDuration() + " seconds");
                                 else //no thundering
                                     log.info("[StacheStash] The weather in " + cWorld.getName() + " is rain for " + cWorld.getWeatherDuration() + " seconds");
                             }
