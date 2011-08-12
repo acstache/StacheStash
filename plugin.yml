@@ -1,6 +1,6 @@
 name: StacheStash
 main: com.ACStache.StacheStash.StacheStash
-version: 0.1.5
+version: 0.1.5a
 author: ACStache
 description: Collection of useful commands
 commands:
