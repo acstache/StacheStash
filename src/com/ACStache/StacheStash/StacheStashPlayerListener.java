@@ -35,5 +35,6 @@ public class StacheStashPlayerListener extends PlayerListener
         player = event.getPlayer();
         //??
         //profit
+        //was used in original variant of '/who' and '/list'
     }
 }

@@ -114,17 +114,17 @@ public class StacheWeather
             {
                 if(args.length < 2) //only arg is get
                 {
-                    World pWorld = Bukkit.getServer().getWorld(player.getName()); //get player's current world
+                    World pWorld = player.getWorld(); //get player's current world
                     if(pWorld.hasStorm()) //if there's a storm
                     {
                         if(pWorld.isThundering()) //check for thundering
-                            player.sendMessage(ChatColor.GREEN + "The weather is thunder & lightning");
+                            player.sendMessage(ChatColor.GREEN + "The weather is thunder & lightning for " + pWorld.getWeatherDuration() + " seconds");
                         else //no thundering
-                            player.sendMessage(ChatColor.GREEN + "The weather is rain");
+                            player.sendMessage(ChatColor.GREEN + "The weather is rain for " + pWorld.getWeatherDuration() + " seconds");
                     }
                     else //no rain, must be sunny
                     {
-                        player.sendMessage(ChatColor.GREEN + "The weather is sunny");
+                        player.sendMessage(ChatColor.GREEN + "The weather is sunny for " + pWorld.getWeatherDuration() + " seconds");
                     }
                 }
                 else //world specified
@@ -134,13 +134,13 @@ public class StacheWeather
                         if(cWorld.hasStorm()) //if there's a storm
                         {
                             if(cWorld.isThundering()) //check for thundering
-                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is thunder & lightning");
+                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is thunder & lightning for " + cWorld.getWeatherDuration() + " seconds");
                             else //no thundering
-                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is rain");
+                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is rain for " + cWorld.getWeatherDuration() + " seconds");
                         }
                         else //no rain, must be sunny
                         {
-                            player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is sunny");
+                            player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is sunny for " + cWorld.getWeatherDuration() + " seconds");
                         }
                     else //world typed incorrectly
                     {
@@ -161,13 +161,13 @@ public class StacheWeather
                             if(cWorld.hasStorm()) //if there's a storm
                             {
                                 if(cWorld.isThundering()) //check for thundering
-                                    log.info("[StacheStash] The weather in " + cWorld.getName() + " is thunder & lightning");
+                                    log.info("[StacheStash] The weather in " + cWorld.getName() + " is thunder & lightning for " + cWorld.getWeatherDuration() + " seconds");
                                 else //no thundering
-                                    log.info("[StacheStash] The weather in " + cWorld.getName() + " is rain");
+                                    log.info("[StacheStash] The weather in " + cWorld.getName() + " is rain for " + cWorld.getWeatherDuration() + " seconds");
                             }
                             else //no rain, must be sunny
                             {
-                                log.info("[StacheStash] The weather in " + cWorld.getName() + " is sunny");
+                                log.info("[StacheStash] The weather in " + cWorld.getName() + " is sunny for " + cWorld.getWeatherDuration() + " seconds");
                             }
                         else //world typed incorrectly
                         {
