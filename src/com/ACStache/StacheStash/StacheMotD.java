@@ -109,6 +109,7 @@ public class StacheMotD
      */
     public static void loadMotD() throws IOException
     {
+        clearMotD();
         String line;
         BufferedReader br = new BufferedReader(new FileReader(file));
         
@@ -130,6 +131,16 @@ public class StacheMotD
         writer.write("Welcome to the server!");
         writer.write("Please enjoy your stay!");
         loadMotD();
+    }
+    
+    /**
+     * Clears out the ArrayList<String> of any current MotD loaded into it.
+     * Useful for reloading a new MotD
+     */
+    public static void clearMotD()
+    {
+        while(!motdlist.isEmpty())
+            motdlist.remove(0);
     }
     
     /**

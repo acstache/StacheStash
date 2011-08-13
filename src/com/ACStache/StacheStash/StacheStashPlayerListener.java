@@ -3,7 +3,6 @@ package com.ACStache.StacheStash;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerListener;
 
 public class StacheStashPlayerListener extends PlayerListener
@@ -20,7 +19,7 @@ public class StacheStashPlayerListener extends PlayerListener
     { 
         player = event.getPlayer();
         //StacheMotD.showMotD(player); //if used, first line won't show properly
-        Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable()
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable()
         {
             public void run()
             {
@@ -28,13 +27,5 @@ public class StacheStashPlayerListener extends PlayerListener
                 StacheList.showOnline(player);
             }
         }, 4); //delays showing the MotD by 4 server ticks (~1/5 of a second)
-    }
-    
-    public void onPlayerQuit(PlayerQuitEvent event)
-    {
-        player = event.getPlayer();
-        //??
-        //profit
-        //was used in original variant of '/who' and '/list'
     }
 }

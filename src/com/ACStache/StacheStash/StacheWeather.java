@@ -118,13 +118,13 @@ public class StacheWeather
                     if(pWorld.hasStorm()) //if there's a storm
                     {
                         if(pWorld.isThundering()) //check for thundering
-                            player.sendMessage(ChatColor.GREEN + "The weather is thunder and lightning for " + pWorld.getWeatherDuration() + " seconds");
+                            player.sendMessage(ChatColor.GREEN + "The weather is thunder and lightning for " + pWorld.getWeatherDuration()/20 + " seconds");
                         else //no thundering
-                            player.sendMessage(ChatColor.GREEN + "The weather is rain for " + pWorld.getWeatherDuration() + " seconds");
+                            player.sendMessage(ChatColor.GREEN + "The weather is rain for " + pWorld.getWeatherDuration()/20 + " seconds");
                     }
                     else //no rain, must be sunny
                     {
-                        player.sendMessage(ChatColor.GREEN + "The weather is sunny for " + pWorld.getWeatherDuration() + " seconds");
+                        player.sendMessage(ChatColor.GREEN + "The weather is sunny for " + pWorld.getWeatherDuration()/20 + " seconds");
                     }
                 }
                 else //world specified
@@ -134,13 +134,13 @@ public class StacheWeather
                         if(cWorld.hasStorm()) //if there's a storm
                         {
                             if(cWorld.isThundering()) //check for thundering
-                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is thunder and lightning for " + cWorld.getWeatherDuration() + " seconds");
+                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is thunder and lightning for " + cWorld.getWeatherDuration()/20 + " seconds");
                             else //no thundering
-                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is rain for " + cWorld.getWeatherDuration() + " seconds");
+                                player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is rain for " + cWorld.getWeatherDuration()/20 + " seconds");
                         }
                         else //no rain, must be sunny
                         {
-                            player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is sunny for " + cWorld.getWeatherDuration() + " seconds");
+                            player.sendMessage(ChatColor.GREEN + "The weather in " + cWorld.getName() + " is sunny for " + cWorld.getWeatherDuration()/20 + " seconds");
                         }
                     else //world typed incorrectly
                     {

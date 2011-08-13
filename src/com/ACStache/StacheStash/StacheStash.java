@@ -71,6 +71,7 @@ public class StacheStash extends JavaPlugin
     public void onDisable()
     {
         log.info("[StacheStash] v" + info.getVersion() + "disabled!");
+        StacheMotD.clearMotD();
     }
     
     private void setupPermissions()
